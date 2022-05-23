@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Pi Car - Your Daily Pick-Up Jounery</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5 justify-content-center">
+                
+                <a class="navbar-brand text-center" href="#!">
+                    <img class="img-fluid" src="./assets/logo.png"> <br>
+                    <span id="companyName" class="lh-sm fs-3 fst-italic font-monospace text-decoration-underline"></span> &nbsp
+                    <img class="planLogoImg" src="" style="width:1.6em">
+                </a>
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button> -->
+                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="py-2 py-lg-5">
+            <div class="container px-lg-5">
+                <div class="p-2 p-lg-4 bg-light rounded-3 text-center">
+                    <div class="m-2 m-lg-4">
+                        <img src="./assets/route.png" style="width: 50%" />
+
+                        <h1 class="display-5 fw-bold">Just finished a PiCar jounery? </h1> 
+                         <br>
+                        <p class="fs-5">Please check details below and confirm <i class="bi bi-emoji-smile"></i></p>
+                        <!-- <p class="fs-9 font-weight-light">Not working? Simply <u onclick="refreshToken()"> refresh token</u>. </p> -->
+                        <div id="last_trip" class="w-90 w-lg-75" style="display: none; margin: auto;">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr>
+                                  <th scope="row" class="text-end col-4">Distance</th>
+                                  <td class="col-8" ><span id="trip_distance">0</span>&nbsp miles</td>
+                                </tr>
+                                <!-- <tr>
+                                  <th scope="row" class="text-end">Expected Electricity Cost</th>
+                                  <td><span id="trip_electricity">0</span>&nbsp kWh</td>
+                                </tr>   -->    
+                                <tr>
+                                  <th scope="row" class="text-end">Trip Time</th>
+                                  <td> <span id="trip_min">0</span> min <span id="trip_sec"></span> sec</td>
+                                </tr>                          
+                                <tr>
+                                  <th scope="row" class="text-end">Start Time</th>
+                                  <td id="trip_start">2019-01-01T05:00:00Z</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row" class="text-end">End Time</th>
+                                  <td id="trip_end">2019-02-01T05:00:00Z</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary btn-lg" id="btn-post" href="#!" onclick="postTrip(toastList[1])">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Confirm this trip
+                        </button>
+                        <br>
+                        <a class="fs-6 fw-lighte pe-auto" onclick="haveProblem(toastList[0])" href="mailto:y783429526@gmail.com">Report problem?</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- toasts bengin -->
+        <div class="toast-container position-absolute p-3 bottom-0 start-50 translate-middle-x" style="z-index: 111" id="toastPlacement">
+          <div id="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#FFCC00"></rect></svg>
+              <strong class="me-auto">Questions on This Trip</strong>
+              <!-- <small>11 mins ago</small> -->
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Your trip will be saved for further aduiting. You will be contacted by our Customer Service team.
+            </div>
+          </div>
+        </div>
+<!--         <div class="toast-container position-absolute p-3 bottom-0 start-50 translate-middle-x" style="z-index: 111" id="toastPlacement">
+          <div id="toast1" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+              <strong class="me-auto">Trip Posted</strong>
+              <small>11 mins ago</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Your trip is posted.
+            </div>
+          </div>
+        </div> -->
+        <!-- toasts end -->
+
+
+        <!-- Page Content-->
+        <section class="pt-4" id="additional_charge_item" style="display:none">
+            <div class="container px-lg-5">
+                <!-- Page Features-->
+                <div class="row gx-lg-5">
+                    <div class="col-lg-6 col-xxl-4 mb-5" id="additional_pvs" style="display:none">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-emoji-sunglasses"></i></div>
+                                <h2 class="fs-4 fw-bold">PVS Applied</h2>
+                                <p class="mb-0">Enjoy our premium vehicle service (PVS)! Premium vehicles with designed interiors are now improved with leather seats, panoramic skylight, and on-board media center as standard. <br>
+                                </p>
+                                 <span class="fs-6 lh-1"> *Your service provider might get charged for PVS. Simply click 'Report problem?' button above if you met a problem. </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5" id="additional_sts" style="display:none">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-telephone-outbound"></i></div>
+                                <h2 class="fs-4 fw-bold">STS Applied</h2>
+                                <p class="mb-0">Empower your on-going business with high-quality Satellite Telephone Service (STS), only available on PVS. </p>
+                                <span class="fs-6 lh-1"> *As an additional service, STS is charged in actual usage. </span>
+                            </div>
+                        </div>
+                    </div>
+<!--                     <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-card-heading"></i></div>
+                                <h2 class="fs-4 fw-bold">Jumbotron hero header</h2>
+                                <p class="mb-0">The heroic part of this template is the jumbotron hero header!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-bootstrap"></i></div>
+                                <h2 class="fs-4 fw-bold">Feature boxes</h2>
+                                <p class="mb-0">We've created some custom feature boxes using Bootstrap icons!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-code"></i></div>
+                                <h2 class="fs-4 fw-bold">Simple clean code</h2>
+                                <p class="mb-0">We keep our dependencies up to date and squash bugs as they come!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-patch-check"></i></div>
+                                <h2 class="fs-4 fw-bold">A name you trust</h2>
+                                <p class="mb-0">Start Bootstrap has been the leader in free Bootstrap templates since 2013!</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; PiCar Corp. 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script> -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- Animation JS -->
+        <script src="js/jquery.min.js"></script>
+        <script>
+
+            // for avoid cors
+            (jQuery.ajaxPrefilter(function(options) {
+                if (options.crossDomain && jQuery.support.cors) {
+                    options.url = 'https://glacial-sea-55253.herokuapp.com/' + options.url;
+                }
+            }));
+
+            refreshToken();
+            showRandomPlan(false);
+
+            // slide down animation            
+            $('#last_trip').slideDown(1000);
+
+            // init toast
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+              return new bootstrap.Toast(toastEl)
+            })
+
+
+        </script>
+
+    </body>
+</html>

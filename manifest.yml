@@ -1,0 +1,8 @@
+---
+applications:
+- name: pi-car
+  random-route: true
+  buildpack: staticfile_buildpack
+  memory: 1G
+  disk_quota: 512M
+  path: ./
